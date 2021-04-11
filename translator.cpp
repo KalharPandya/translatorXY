@@ -12,6 +12,12 @@ translateXY::translateXY(){
 void translateXY::setXY(double x, double y){
     translateXY::fx = x;
     translateXY::fy = y;
+    translateXY::mag = sqrt(pow(x,2) + pow(y,2));
+    if(fx==0){
+        translateXY::targetTheta=1.57;
+    }
+    else
+        translateXY::targetTheta = atan(translateXY::fy/translateXY::fx);
 }
 void translateXY::setAngle(double a){
     // Serial.println(a);
@@ -19,10 +25,11 @@ void translateXY::setAngle(double a){
 }
 
 void translateXY::compute(){
+    translateXY::diff = translateXY::targetTheta - translateXY::currentTheta;
     // Serial.println(translateXY::currentTheta);
-    translateXY::ox=translateXY::fx*cos(translateXY::currentTheta)+translateXY::fy*sin(translateXY::currentTheta);
-    translateXY::oy=translateXY::fy*cos(translateXY::currentTheta)+translateXY::fx*sin(translateXY::currentTheta);
-}
+    translateXY::ox = translateXY::mag*cos(translateXY::diff);
+    translateXY::oy = translateXY::mag*sin(translateXY::diff);
+    }
 
 double translateXY::getX(){
     return translateXY::ox;

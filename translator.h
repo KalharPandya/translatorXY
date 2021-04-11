@@ -3,7 +3,7 @@
 class translateXY
 {
 public:
-    double fx, fy, ox, oy, currentTheta, targetTheta;
+    double fx, fy, ox, oy, currentTheta, targetTheta, mag, diff;
     translateXY();
     void setXY(double x, double y = 0);
     void setAngle(double ang = 0);
